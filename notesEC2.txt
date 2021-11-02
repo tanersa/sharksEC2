@@ -51,6 +51,7 @@ Date: 10/31/2021 EC2 cont. Load Balancers
 2. 4 types of LBs --> 1) Application LB (ALB), 2) Network LB (NLB), 3) Gateway LB (GLB) and 4) Elastic LB (ELB)
 3. Nowdays we don't usually use ELB. It used with Classic EC2 instances. 
 
+
 NLB 
 
 Scenario: During regular time each day 1 million people do shopping from Amazon. 
