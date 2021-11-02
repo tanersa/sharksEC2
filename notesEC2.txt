@@ -1,0 +1,76 @@
+Date: 10/24/2021 EC2 notes 
+
+1. EC2 (Elastic Cloud Compute)
+2. AMI (Amazin Machine Image) which comes with preconfigured software
+3. After spinning up the EC2 instance (VM) we need to lock down pem file permissions
+4. chmod 400 ~/Downloads/pemfile 
+5. ssh -i ~/Downloads/pemfile ec2-user@public IP
+6. whoami --> To detect the user of vm 
+7. ifconfig --> Returns private IP of machine 
+8. cat /etc/os-release --> get info about vm OS 
+9. For OS like RedHat, Centos, Fedora, Amazon Linux we use YUM package manager
+10. sudo yum update -y
+11. sudo yum install httpd -y
+12. sudo service httpd status
+13. sudo service httpd start
+14. sudo service httpd status
+15. sudo chkconfig httpd on  --> Start up httpd during the boot time 
+16. cd /var/www/html 
+17. sudo vim index.html  --> <h1> Welcome Sharks from New Jersey and Edirne </h1>
+18. To exit from vim editor press on esc and click on colon and wq for write and quit 
+
+Date: 10/28/2021 EC2 notes cont. 
+
+1. In Linux --> id -- print real and effective user and group IDs
+2. sudo usermod -a -G apache ec2-user --> Adds user to group 
+3. chown - change file owner and group
+4. sudo chown -R ec2-user:apache /var/www/
+5. echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.phps
+6. Why we use Private AMIs --> 1) Security -- because only account owner can access it and 2) It comes with software we installed
+7. CloudWatch --> AWS native Logging and Monitoring tool/service 
+8. sudo yum install -y awslogs --> Installs awslogs client for CloudWatch
+9. sudo systemctl start awslogsd
+10. sudo systemctl status awslogsd
+
+Date: 10/30/2021 EC2 cont.
+ 
+1. EBS -- Elastic Block Store. 
+2. 2 kinds of storages --> 1) Block or Persistent and 2) Ephemeral
+3. Certain data is critical data so we don't want to loose the data even though EC2 goes down. 
+4. Ephemeral storage --> Data is available only during uptime.  In case EC2 goes down we say bye bye to data. 
+5. Limitations of EBS --> Only available in single AZ. 
+6. lsblk - list block devices
+7. Create a new FileSystem on the volume --> mkfs - build a Linux filesystem
+8. mkfs -t ext4 /dev/sdf
+
+
+
+Date: 10/31/2021 EC2 cont. Load Balancers
+
+1. Load Balancers (LB) distributes traffic among healthy instances, containers and IP addresses.
+2. 4 types of LBs --> 1) Application LB (ALB), 2) Network LB (NLB), 3) Gateway LB (GLB) and 4) Elastic LB (ELB)
+3. Nowdays we don't usually use ELB. It used with Classic EC2 instances. 
+
+NLB 
+
+Scenario: During regular time each day 1 million people do shopping from Amazon. 
+          But on Black Friday suddenly 10 million people shopped from Amazon within 20 mins.
+          We have only 3 EC2 (VM) instances. This 3 VM can only handle 1.5 million people in 1 day. 
+
+How we will handle this situation? 
+
+We will leverage NLB. 
+
+1. Network Load Balancers are capable of handling millions of requests per second securely while 
+maintaining ultra-low latencies.
+2. 2 types of Scheme --> 1) Internet facing and 2) Internal 
+3. Before NLB we created Target Group and registered instances. 
+4. In order instances come back healthy we configured WebServer (Apache/HTTPD).
+5. In order to test our solution we ssh into Admin instances and run following commands:
+
+while true;
+do 
+wget <NLB DNS name>
+done 
+
+After running above command terminal will go crazy. Go to NLB monitoring and monitor the traffic.
