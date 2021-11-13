@@ -1,0 +1,46 @@
+Date: 11/06/2021  Load Balancers
+
+1. Difference between HTTP and HTTPS --> HTTPS is secure than HTTP
+2. HTTPS uses TLS (Transport Layer Security). SSL (Secure Socket Layer) is a old name 
+3. We redirect traffic from HTTP to HTTPS. 
+4. HTTPS use Certificate. We call it encryption in transit.
+5. Default port for HTTPS --> 443
+6. Default port for HTTP --> 80
+7. In order to use Certificate we need to obtain it from CA (Certificate Authority)
+8. Elastic IP is a static IP. If you use (Reserve) Elastic IP AWS doesn't charge you. If you reserve Elastic IP 
+but don't use AWS will charge you. 
+
+ALB/ASG (Auto Scaling Group)
+
+Scenario:
+
+1. We have e-commerce application. We are selling Sony MX4 headsets. Original Price is $350 and plus tax.
+Currently we have $100 off for this product as a pre Black Friday sale and this will last only 7 days. 
+Due to sale more users start hitting the website and making more purchases. It will increase the traffic. 
+2 Instances aren't enough to handle the traffic. We need to build scalable infrastructure. Also we have to 
+build Cost-Optimized infrastructure. After 7 days of sales traffic will go back to normal. 
+For example during peak time we increased (scaled up) our instances from 2 to 4. But during regular time 
+2 instances are enough to handle the traffic. We have decrease (scale down) the number instances. 
+
+Extra note: Horizontal scaling means adding more machines to the resource pool, rather than simply 
+adding resources by scaling vertically. ... Scaling horizontally is the same as scaling by adding 
+more machines to a pool or resources — but instead of adding more power, CPUs, or RAM, you scale 
+back to existing infrastructure.
+
+Kaizen is a Japanese term meaning "change for the better" or "continuous improvement." 
+It is a Japanese business philosophy regarding the processes that continuously improve 
+operations and involve all employees. Kaizen sees improvement in productivity as a gradual 
+and methodical process.
+
+
+After building scalable infrastructure we need to test it in order to verify/justify that it won't break 
+during the peak traffic. We need to conduct STRESS testing. 
+
+sudo amazon-linux-extras install epel -y
+sudo yum install -y stress
+stress --cpu 2 --timeout 300
+
+Click on Control+C after testing to stop stress testing. 
+
+After this number of instances must go back to Desired Capacity. It will take some time and it's called 
+Cooldown period. 
