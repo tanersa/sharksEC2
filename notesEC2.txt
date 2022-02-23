@@ -19,6 +19,7 @@ Date: 10/24/2021 EC2 notes
 17. sudo vim index.html  --> <h1> Welcome Sharks from New Jersey and Edirne </h1>
 18. To exit from vim editor press on esc and click on colon and wq for write and quit 
 
+
 Date: 10/28/2021 EC2 notes cont. 
 
 1. In Linux --> id -- print real and effective user and group IDs
