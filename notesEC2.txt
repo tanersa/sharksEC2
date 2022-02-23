@@ -40,7 +40,7 @@ Date: 10/30/2021 EC2 cont.
 4. Ephemeral storage --> Data is available only during uptime.  In case EC2 goes down we say bye bye to data. 
 5. Limitations of EBS --> Only available in single AZ. 
 6. lsblk - list block devices
-7. Create a new FileSystem on the volume --> mkfs - build a Linux filesystem
+7. Create a new FileSystem on the volume --> mkfs - build a Linux filesystem.
 8. mkfs -t ext4 /dev/sdf
 
 
