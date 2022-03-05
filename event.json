@@ -9,6 +9,7 @@
     "resources": [
         "arn:aws:ec2:us-east-1:482011693820:instance/i-0df2c2bd465df7fb1"
     ],
+    
     "detail": {
         "instance-id": "i-0df2c2bd465df7fb1",
         "state": "stopping"
