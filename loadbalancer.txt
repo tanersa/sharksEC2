@@ -32,7 +32,6 @@ It is a Japanese business philosophy regarding the processes that continuously i
 operations and involve all employees. Kaizen sees improvement in productivity as a gradual 
 and methodical process.
 
-
 After building scalable infrastructure we need to test it in order to verify/justify that it won't break 
 during the peak traffic. We need to conduct STRESS testing. 
 
